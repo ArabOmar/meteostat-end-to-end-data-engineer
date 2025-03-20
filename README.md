@@ -63,6 +63,7 @@ For more details, visit the [Meteostat API documentation](https://meteostat.net/
     - Extract metadata of weather stations near Nîmes, France, and metric data from nearby stations using Meteostat API.  
     - Uses extract_api_1.py for station metadata and extract_api_2.py for metric data retrieval.  
     - Store extracted raw data in an **S3 bucket** under a dedicated folder for organization.
+    - Ensure the Lambda function has the minimal necessary **IAM policies** to write the raw files to S3.
     
 3. **Automated Data Collection with AWS Lambda & CloudWatch**  
   - Set up **AWS Lambda** functions triggered by **Amazon CloudWatch**:  
@@ -73,11 +74,13 @@ For more details, visit the [Meteostat API documentation](https://meteostat.net/
   - Implement a transformation function using AWS Lambda:  
     - Cleans, processes, and keeps only **essential** data.  
     - Uses transform_api_1.py for metadata and transform_api_2.py for metric data.
+    - Ensure the Lambda function has the minimal necessary **IAM policies** to get/put the files from/to S3.
     - Load transformed data into a **processed folder** in S3.  
     - Follows a **/year/month/day** pattern for partitioning, enabling optimized querying.  
 
 5. **Automating Transformation Trigger**  
-  - Set up an event-based trigger to **automatically execute the transformation function** when new raw data is added to S3.  
+  - Set up an event-based trigger to **automatically execute the transformation function** when new raw data is added to S3.
+  - Ensure the transformation Lambda function has the proper **IAM policy** allowing it to be invoked securely when a raw file is created.
 
 6. **Cleaning Up Old Raw Data**  
   - Create a scheduled Lambda function to **delete unnecessary raw data** each month.  
