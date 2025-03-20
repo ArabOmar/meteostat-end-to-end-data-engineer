@@ -15,7 +15,7 @@ This project demonstrates an end-to-end data engineering pipeline that fetches m
 
 3.  **Amazon CloudWatch** is a monitoring and observability service for AWS resources and applications. It collects and tracks metrics, logs, and events, helping you monitor the health and performance of your systems, and set alarms for automatic responses to issues.
 
-4. ** AWS Glue Crawler** automatically discovers and catalogs data from different sources in your AWS environment. It identifies the data's structure and schema, making it easier to query and analyze by organizing it into a centralized data catalog.
+4. **AWS Glue Crawler** automatically discovers and catalogs data from different sources in your AWS environment. It identifies the data's structure and schema, making it easier to query and analyze by organizing it into a centralized data catalog.
 
 5. **AWS Glue Data Catalog** is a central repository that stores metadata about your data, such as its schema, location, and format. It enables seamless discovery, management, and access to datasets across AWS services like Athena, Redshift, and EMR. It helps streamline ETL processes and ensures consistent, organized data for analytics.
 
