@@ -5,7 +5,7 @@ This project demonstrates an end-to-end data engineering pipeline that fetches m
 
 
 ### Architecture
-![Architecture Diagram](https://github.com/ArabOmar/meteostat-end-to-end-data-engineer/blob/main/meteostat-project.png)
+![Architecture Diagram](https://github.com/ArabOmar/meteostat-end-to-end-data-engineer/blob/main/Images/meteostat-project.png)
 
 
 ### Services Used
