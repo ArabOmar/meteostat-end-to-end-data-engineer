@@ -54,35 +54,35 @@ For more details, visit the [Meteostat API documentation](https://meteostat.net/
 
 ### Project Execution Flow  
 
-#### **1. Data Extraction**  
-- Extract metadata of weather stations near Nîmes, France, and metric data from nearby stations.  
-- Uses `extract_api_1.py` for station metadata and `extract_api_2.py` for metric data retrieval.  
+1. **AWS Lambda Layers for Dependencies**  
+- Created **Lambda layers** for httpx (for API requests) and pandas (for data processing).  
+- These layers ensure efficient dependency management and reduce package size in Lambda functions.  
 
-#### **2. Automated Data Collection with AWS Lambda & CloudWatch**  
+2. **Data Extraction**
+- Implement an extraction function using AWS Lambda:
+  - Extract metadata of weather stations near Nîmes, France, and metric data from nearby stations using Meteostat API.  
+  - Uses extract_api_1.py for station metadata and extract_api_2.py for metric data retrieval.  
+  - Store extracted raw data in an **S3 bucket** under a dedicated folder for organization.
+    
+3. **Automated Data Collection with AWS Lambda & CloudWatch**  
 - Set up **AWS Lambda** functions triggered by **Amazon CloudWatch**:  
   - **Metadata extraction:** Runs **monthly**.  
   - **Metric data extraction:** Runs **hourly**.  
 
-#### **3. Storing Raw Data in S3**  
-- Store extracted raw data in an **S3 bucket** under a dedicated folder for organization.  
-
-#### **4. Data Transformation**  
+4. **Data Transformation**  
 - Implement a transformation function using AWS Lambda:  
   - Cleans, processes, and keeps only **essential** data.  
-  - Uses `transform_api_1.py` for metadata and `transform_api_2.py` for metric data.  
+  - Uses transform_api_1.py for metadata and transform_api_2.py for metric data.
+  - Load transformed data into a **processed folder** in S3.  
+  - Follows a **/year/month/day** pattern for partitioning, enabling optimized querying.  
 
-#### **5. Storing Processed Data with Partitioning**  
-- Load transformed data into a **processed folder** in S3.  
-- Follows a **/year/month/day** pattern for partitioning, enabling optimized querying.  
-
-#### **6. Automating Transformation Trigger**  
+5. **Automating Transformation Trigger**  
 - Set up an event-based trigger to **automatically execute the transformation function** when new raw data is added to S3.  
 
-#### **7. Cleaning Up Old Raw Data**  
+6. **Cleaning Up Old Raw Data**  
 - Create a scheduled Lambda function to **delete unnecessary raw data** each month.  
 - Prevents excessive storage consumption by removing outdated files.  
 
-#### **8. Cataloging & Querying with AWS Glue & Athena**  
+7. **Cataloging & Querying with AWS Glue & Athena**  
 - Create an **AWS Glue Crawler** to scan and catalog processed data.  
 - Use **Amazon Athena** for querying and analyzing the cleaned, structured data efficiently.  
-
