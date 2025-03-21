@@ -9,6 +9,7 @@ This project demonstrates an end-to-end data engineering pipeline that fetches m
 
 
 ### Services Used
+
 1. **Amazon S3** is a highly scalable and secure cloud storage solution for storing and retrieving data like files, images, and backups. It offers durability, easy access from anywhere, data encryption, and seamless integration with other AWS services for efficient data management.
 
 2. **AWS Lambda** is a serverless computing service that lets you run code in response to events without provisioning or managing servers. It automatically scales based on demand, providing a cost-effective and efficient way to execute applications in real time.
